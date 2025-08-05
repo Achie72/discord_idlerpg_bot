@@ -1,0 +1,34 @@
+{
+    "stats" : {
+        "strength": 3,
+        "dexterity": 3,
+        "intelligence": 3
+    },
+    "skills" : {
+        "melee": {
+            "current_xp": 0,
+            "current_level":0
+        },
+        "ranged": {
+            "current_xp": 0,
+            "current_level":0
+        },
+        "spellcasting": {
+            "current_xp": 0,
+            "current_level":0
+        },
+        "fishing": {
+            "current_xp": 0,
+            "current_level":0
+        },
+        "woodcutting": {
+            "current_xp": 0,
+            "current_level":0
+        },
+        "mining": {
+            "current_xp": 0,
+            "current_level":0
+        }
+    },
+    "inventory": {}
+}
