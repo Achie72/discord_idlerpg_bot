@@ -1,0 +1,18 @@
+{
+    "iron_ingot" : {
+        "cost" : {
+            "coal": 2,
+            "iron": 1
+        },
+        "amount" : 1,
+        "level_required": 0
+    },
+    "iron_plate": {
+        "cost" : {
+            "coal": 2,
+            "iron_ingot": 1
+        },
+        "amount" : 1,
+        "level_required": 0
+    }
+}

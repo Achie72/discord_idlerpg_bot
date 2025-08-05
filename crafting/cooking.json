@@ -1,0 +1,18 @@
+{
+    "cooked_fish" : {
+        "cost" : {
+            "coal": 1,
+            "fish": 1
+        },
+        "amount" : 1,
+        "level_required": 0
+    },
+    "apple_pie": {
+        "cost" : {
+            "apple": 1,
+            "sugar": 1
+        },
+        "amount" : 1,
+        "level_required": 0
+    }
+}
