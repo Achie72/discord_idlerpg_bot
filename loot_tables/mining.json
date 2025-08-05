@@ -1,0 +1,67 @@
+{
+    "common" : {
+        "coal": {
+            "weight": 5,
+            "range":{
+                "low": 1,
+                "high": 3
+            }
+        },
+        "iron": {
+            "weight": 1,
+            "range":{
+                "low": 1,
+                "high": 3
+            }
+        }
+    },
+    "rare" : {
+        "iron": {
+            "weight": 5,
+            "range":{
+                "low": 1,
+                "high": 3
+            }
+        },
+        "gold": {
+            "weight": 1,
+            "range":{
+                "low": 1,
+                "high": 3
+            }
+        }
+    },
+    "epic" : {
+        "gold": {
+            "weight": 10,
+            "range":{
+                "low": 1,
+                "high": 3
+            }
+        },
+        "diamond": {
+            "weight": 1,
+            "range":{
+                "low": 1,
+                "high": 3
+            }
+        }
+    },
+    "legendary" : {
+        "diamond": {
+            "weight": 10,
+            "range":{
+                "low": 1,
+                "high": 3
+            }
+        },
+        "adamantite": {
+            "weight": 1,
+            "range":{
+                "low": 1,
+                "high": 3
+            }
+        }
+    }
+    
+}
