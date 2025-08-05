@@ -1,0 +1,46 @@
+{
+    "common" : {
+        "fish": {
+            "weight": 5,
+            "range":{
+                "low": 1,
+                "high": 3
+            }
+        },
+        "junk": {
+            "weight": 1,
+            "range":{
+                "low": 1,
+                "high": 3
+            }
+        }
+    },
+    "rare" : {
+        "coins": {
+            "weight": 1,
+            "range":{
+                "low": 1,
+                "high": 3
+            }
+        }
+    },
+    "epic" : {
+        "coins": {
+            "weight": 1,
+            "range":{
+                "low": 3,
+                "high": 10
+            }
+        }
+    },
+    "legendary" : {
+        "ligma": {
+            "weight": 1,
+            "range":{
+                "low": 1,
+                "high": 1
+            }
+        }
+    }
+    
+}

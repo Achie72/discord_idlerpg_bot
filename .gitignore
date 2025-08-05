@@ -1,2 +1,3 @@
 character_data/
+__pycache__/
 .env
