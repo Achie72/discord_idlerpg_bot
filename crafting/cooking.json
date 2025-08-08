@@ -5,14 +5,18 @@
             "fish": 1
         },
         "amount" : 1,
-        "level_required": 0
+        "level_required": 0,
+        "desc": "Create 1 Cooked Fish with 1 Fish and 1 Coal",
+        "display_name": "Cooked Fish"
     },
     "apple_pie": {
         "cost" : {
             "apple": 1,
-            "sugar": 1
+            "honey": 1
         },
         "amount" : 1,
-        "level_required": 0
+        "level_required": 0,
+        "desc": "Create 1 Apple Pie with 1 Apple and 1 Honey",
+        "display_name": "Apple Pie"
     }
 }

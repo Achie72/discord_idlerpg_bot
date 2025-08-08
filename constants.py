@@ -2,7 +2,7 @@ CHARACTER_ALREADY_CREATED = "Character already created"
 CHARACTER_CREATED = "Character created"
 CHARACTER_NOT_CREATED = "Character not created yet. use init command."
 CHARACTER_DIR = "./character_data/"
-CHARACTER_OCCUPIED = "Character already occupied"
+CHARACTER_OCCUPIED = "**⚠️ Character already occupied:\n\n**"
 CHARACTER_IDLE = "Character is idle"
 CHARACTER_FINISHED = "Character finished"
 INVENTORY_EMPTY = "Inventory empty"
@@ -19,9 +19,11 @@ ACTIVITY_FISHING = "fishing"
 ACTIVITY_MINING = "mining"
 ACTIVITY_SMITHING = "smithing"
 ACTIVITY_COOKING = "cooking"
+ACTIVITY_ADVENTURE = "adventure"
 
 LOOT_TABLE_DIR = "./loot_tables/"
 CRAFTING_RECIPE_DIR = "./crafting/"
+ADVENTURE_DIR = "./adventures/"
 
 
 DEFAULT_RARITY_CHANCES = [70, 20, 9, 1]

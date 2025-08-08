@@ -5,7 +5,9 @@
             "iron": 1
         },
         "amount" : 1,
-        "level_required": 0
+        "level_required": 0,
+        "desc": "Create 1 Iron Ingot with 1 Iron and 2 Coal",
+        "display_name": "Iron Ingot"
     },
     "iron_plate": {
         "cost" : {
@@ -13,6 +15,8 @@
             "iron_ingot": 1
         },
         "amount" : 1,
-        "level_required": 0
+        "level_required": 0,
+        "desc": "Create 1 Iron Plate with 1 Iron Ingot and 2 Coal",
+        "display_name": "Iron Plate"
     }
 }

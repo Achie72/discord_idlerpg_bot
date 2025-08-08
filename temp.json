@@ -2,7 +2,8 @@
     "stats" : {
         "strength": 3,
         "dexterity": 3,
-        "intelligence": 3
+        "intelligence": 3,
+        "health": 100
     },
     "skills" : {
         "melee": {
