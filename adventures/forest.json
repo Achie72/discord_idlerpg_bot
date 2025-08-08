@@ -1,0 +1,82 @@
+{
+    "peaceful": {
+        "healroot": {
+            "weight": 10,
+            "range":{
+                "low": 1,
+                "high": 3
+            }
+        },
+        "carrots": {
+            "weight": 1,
+            "range":{
+                "low": 1,
+                "high": 1
+            }
+        }    
+    },
+    "combat": {
+        "small_wolf": {
+            "weight": 1,
+            "stats": {
+                "strength": 3,
+                "dexterity": 3,
+                "intelligence": 1,
+                "health": 3
+            },
+            "loot":{
+                "hide": {
+                    "weight": 3,
+                    "range":{
+                        "low": 1,
+                        "high": 2
+                    }
+                },
+                "wolf_teeth": {
+                    "weight": 1,
+                    "range":{
+                        "low": 1,
+                        "high": 1
+                    }
+                },
+                "wild_pelt": {
+                    "weight": 1,
+                    "range":{
+                        "low": 1,
+                        "high": 1
+                    }
+                }    
+            },
+            "display_name": "Small Wolf"
+        },
+        "goblin": {
+            "weight": 1,
+            "stats": {
+                "strength": 1,
+                "dexterity": 1,
+                "intelligence": 1,
+                "health": 3
+            },
+            "loot":{
+                "coin": {
+                    "weight": 1,
+                    "range":{
+                        "low": 1,
+                        "high": 3
+                    }
+                },
+                "healroot": {
+                    "weight": 1,
+                    "range":{
+                        "low": 1,
+                        "high": 1
+                    }
+                }    
+            },
+            "display_name": "Small Wolf"
+        }
+    },
+    "display_name": "Plains Adventure",
+    "desc": "Take a stroll in the plains near you. Find herbs, plants and smaller critters.",
+    "combat_ratio": 0.3
+}
