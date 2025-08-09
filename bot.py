@@ -380,7 +380,7 @@ class Dropdown(discord.ui.Select):
         # Set the options that will be presented inside the dropdown
         options = []
         for opt in options_sent:
-            options.append(discord.SelectOption(label=opt['name'],emoji="🛠️",description=opt['desc']))
+            options.append(discord.SelectOption(label=opt['name'],emoji=f"{craft_type == 'healing' and '🩹' or '🛠️'}",description=opt['desc']))
 
         # The placeholder is what will be shown when no option is chosen
         # The min and max values indicate we can only pick one of the three options
@@ -388,7 +388,7 @@ class Dropdown(discord.ui.Select):
         self.craft_type = craft_type
         self.duration = duration
         self.user = user_who_called
-        super().__init__(placeholder='Choose what to craft ...', min_values=1, max_values=1, options=options)
+        super().__init__(placeholder=f"Choose what to {craft_type == 'healing' and 'heal with' or 'craft'}...", min_values=1, max_values=1, options=options)
 
     async def callback(self, interaction: discord.Interaction):
         # Use the interaction object to send a response message containing
@@ -397,19 +397,27 @@ class Dropdown(discord.ui.Select):
         # selected options. We only want the first one.
         if interaction.user.id == self.user:
             self.disabled = True
-            await interaction.response.send_message(f'You selected {self.values[0]}')
             user_name = interaction.user.name
             user_id = interaction.user.id
             user_data_path = fetch_user_data_path(user_name, user_id)
             data = fetch_user_data(user_data_path)
-            start_time = datetime.now()
-            end_time = start_time + timedelta(minutes=self.duration)
-            value_to_json = self.values[0].lower().replace(" ","_")
-            set_activity(self.craft_type,end_time.timestamp(),self.duration,data,user_data_path, value_to_json)
+            if self.craft_type == 'healing':
+                print(self.values[0])
+                heal_value = constants.HEALING_ITEMS.get(self.values[0], 0) * self.duration
+                set_stat('health', data[constants.JSON_STATS].get('health') + heal_value, user_data_path)
+                remove_from_inventory(user_data_path,self.values[0], self.duration)
+                await interaction.message.edit(view=self.view)
+                await interaction.response.send_message(f"You healed for {heal_value}")
+            else:
+                
+                start_time = datetime.now()
+                end_time = start_time + timedelta(minutes=self.duration)
+                value_to_json = self.values[0].lower().replace(" ","_")
+                set_activity(self.craft_type,end_time.timestamp(),self.duration,data,user_data_path, value_to_json)
 
-            #set_activity('fishing',end_time.timestamp(),arg1,data,user_data_path)
+                #set_activity('fishing',end_time.timestamp(),arg1,data,user_data_path)
 
-            await interaction.message.edit(view=self.view)
+                await interaction.message.edit(view=self.view)
         else:
             await interaction.response.send_message('✋ **Not you, you pesky 🐦**')
 
@@ -565,6 +573,50 @@ async def adventure_command(ctx, arg1: int = commands.parameter(default=1, descr
                 set_activity('adventure',end_time.timestamp(),arg1,data,user_data_path, "forest")
                 return await ctx.send(f"{ctx.author} adventured into {emoji} for {arg1} minutes.")
 
+@bot.command(name='train')
+@requires_character_registered()
+@required_idle_character()
+async def adventure_command(ctx):
+    user_data_path = fetch_user_data_path(ctx.author.name, ctx.author.id)
+    data = fetch_user_data(user_data_path)
+    adventure_text = f"""Choose where which training to spend coins on: (available **{data.get('inventory').get('gold', 0)}**)\n
+    💪 - Strength {data.get(constants.JSON_STATS).get('strength')} -> {data.get(constants.JSON_STATS).get('strength')+1}
+    🦶 - Dexterity {data.get(constants.JSON_STATS).get('dexterity')} -> {data.get(constants.JSON_STATS).get('dexterity')+1}
+    🧠 - Intelligence {data.get(constants.JSON_STATS).get('intelligence')} -> {data.get(constants.JSON_STATS).get('intelligence')+1}
+    ❤️ - Health {data.get(constants.JSON_STATS).get('health')} -> {data.get(constants.JSON_STATS).get('health')+1}
+    """
+    message = await ctx.send(adventure_text)
+    options = ("💪","🦶","🧠","❤️")
+    for opt in options:
+        await message.add_reaction(opt)
+
+    def check(r: discord.Reaction, u: Union[discord.Member, discord.User]):  # r = discord.Reaction, u = discord.Member or discord.User.
+        return u.id == ctx.author.id and r.message.channel.id == ctx.channel.id and \
+               str(r.emoji) in options
+        # checking author, channel and only having the check become True when detecting a ✅ or ❌
+        # else, it will timeout.
+
+    try:
+        #                         event = on_reaction_add without on_
+        reaction, user = await bot.wait_for('reaction_add', check = check, timeout = 60.0)
+        # reaction = discord.Reaction, user = discord.Member or discord.User.
+    except asyncio.TimeoutError:
+        # at this point, the check didn't become True.
+        await ctx.send(f"**{ctx.author}**, you didnt react in 60 seconds.")
+        return
+    else:
+        # at this point, the check has become True and the wait_for has done its work, now we can do ours.
+        # here we are sending some text based on the reaction we detected.
+        
+        for emoji in options:
+            if str(reaction.emoji) == emoji:
+                user_data_path = fetch_user_data_path(ctx.author.name, ctx.author.id)
+                data = fetch_user_data(user_data_path)
+                start_time = datetime.now()
+                end_time = start_time + timedelta(minutes=arg1)
+                set_activity('adventure',end_time.timestamp(),arg1,data,user_data_path, "forest")
+                return await ctx.send(f"{ctx.author} adventured into {emoji} for {arg1} minutes.")
+
 @bot.command(name='smithing')
 @requires_character_registered()
 @required_idle_character()
@@ -619,6 +671,26 @@ async def resolve_command(ctx):
     remove_current_activity(user_data_path)
     await ctx.send(looted)
   
+@bot.command(name='heal')
+@requires_character_registered()
+@required_idle_character()
+async def heal_command(ctx, arg1: int = commands.parameter(default=1, description="Minutes to spend on Cooking")):
+
+    user_data_path = fetch_user_data_path(ctx.author.name, ctx.author.id)
+    inventory = fetch_user_inventory(user_data_path=user_data_path)
+    healing_options = []
+    for key,value in inventory.items():
+        if key in constants.HEALING_ITEMS:
+            if value >= arg1:
+                heal_item = { "name": key, "desc": f"Can heal for {constants.HEALING_ITEMS.get(key, 0)*arg1} amount"}
+                healing_options.append(heal_item)
+
+    view = DropdownView(healing_options, constants.ACTIVITY_HEALING, arg1, ctx.author.id)
+    if len(healing_options) > 0:
+    # Sending a message containing our view
+        await ctx.send('Choose a healing item:', view=view)
+    else:
+        await ctx.send(constants.NO_HEALING_ITEMS)
 
 
 @bot.command(name='inventory')
