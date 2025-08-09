@@ -7,6 +7,7 @@ CHARACTER_IDLE = "Character is idle"
 CHARACTER_FINISHED = "Character finished"
 INVENTORY_EMPTY = "Inventory empty"
 NO_INGREDIENTS_FOR_CRAFT = "Not enough ingredients to do this."
+NO_HEALING_ITEMS = "Not enough healing item(s) not found in inventory."
 
 JSON_ACTIVITY = "current_activity"
 JSON_ACTIVITY_DURATION = "duration"
@@ -20,6 +21,7 @@ ACTIVITY_MINING = "mining"
 ACTIVITY_SMITHING = "smithing"
 ACTIVITY_COOKING = "cooking"
 ACTIVITY_ADVENTURE = "adventure"
+ACTIVITY_HEALING = "healing"
 
 LOOT_TABLE_DIR = "./loot_tables/"
 CRAFTING_RECIPE_DIR = "./crafting/"
@@ -27,3 +29,5 @@ ADVENTURE_DIR = "./adventures/"
 
 
 DEFAULT_RARITY_CHANCES = [70, 20, 9, 1]
+
+HEALING_ITEMS = {"fish": 1, "cooked_fish":2, "carrots":2, "cooked_carrots":3, "healroot":4}

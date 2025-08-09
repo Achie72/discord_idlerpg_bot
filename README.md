@@ -12,9 +12,17 @@ Atm supports the following:
 - $inventory - Character inventory
 - $fishing arg1 - Sends the character to fish for arg1 (default 1) minutes
 - $smithing arg1 - Sends the character to smith for arg1 (default 1) minutes
- - Creates a dropdown with recipes the character has ingredients for
+  - Creates a dropdown with recipes the character has ingredients for
 - $cooking arg1 - Sends the character to cook for arg1 (default 1) minutes
- - Creates a dropdown with recipes the character has ingredients for
+  - Creates a dropdown with recipes the character has ingredients for
+- $Heal arg1 - Heals the character with arg1 (default 1) amount of healing items
+  - Creates a dropdown with healing items that have at least arg1 amount in inventory
+- $resolve debugger command to resolve current activity ingoring timestamps
+- $adventure $arg1 - Sends the character to adventure for arg1 (default 1) minutes
+  - Creates an emote based choosing system.
+  - ATM only "forest" work and data is not fully fetched from the json
+- $train - POC, only creates a choose emote prompt
+
 
 # Customization
 
